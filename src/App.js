@@ -12,6 +12,24 @@ const App = () => {
   useEffect(() => {
     if (filterQuery) {
       // use filterQuery function
+      const queryString = filterQuery.toLowerCase()
+
+      const filteredData = data?.results?.filter((contact) => {
+        const fullName = `${contact.name.first} ${contact.name.last}`
+        
+        if (queryString.length === 1) {
+          //only finds the names that start with the input letter
+          const firstLetter = fullName.charAt(0).toLowerCase()
+          return firstLetter === queryString
+        } else {
+          //finds any name that includes the combination of letters typed into the input form
+          return fullName.toLowerCase().includes(queryString)
+        }
+
+      })
+      setContactList(filteredData)
+
+
     } else {
       // display all the data
       setContactList(data?.results)
@@ -19,13 +37,14 @@ const App = () => {
   }, [data, filterQuery])
 
   return (
-    <div className={'bg-gray-700 font-sans tracking-wide'}>
+    <div className={'bg-gray-600 font-sans tracking-wide'}>
       <section>
         <form>
           <input
             type={'text'}
             className={'ml-20 mt-6 rounded-md p-3'}
             placeholder={'type here to filter...'}
+            onChange={(event) => setFilterQuery(event.target.value)}
           />
         </form>
       </section>

@@ -9,7 +9,7 @@ const ContactCards = ({ contactList }) => {
     return (
         <>
             {contactList?.map((contact, index) => (
-                <figure key={index} className='bg-white h-100 rounded-lg shadow-md pt-7 pb-3'>
+                <figure key={index} className='bg-white h-100 rounded-lg shadow-md pt-7 pb-3 px-3'>
                     <img
                         alt='user'
                         className='w-32 h-32 rounded-full mx-auto'
